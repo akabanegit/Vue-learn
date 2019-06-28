@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="./lib/vue-2.4.0.js"></script>
+    <script src="./lib/vue-resource-1.3.4.js"></script>
+    <link rel="stylesheet" href="./lib/bootstrap-3.3.7.css">
+</head>
+<body>
+    <div id="app">
+            <div class="panel panel-primary">
+                    <div class="panel-heading">
+                          <h3 class="panel-title">添加品牌</h3>
+                    </div>
+                    <div class="panel-body form-inline">
+                          <label for="">
+                              Name:
+                              <input type="text" name="" id=""  class='form-control' v-model="name"s>
+                          </label>
+                          <input type="button"  value="添加" name="" id="" class="btn btn-primary" @click="add">
+                    </div>
+              </div>
+               
+      
+              <table class="table table-bordered table-hover table-striped">
+                  <thead>
+                      <tr>
+                          <th>Id</th>
+                          <th>Name</th>
+                          <th>Ctime</th>
+                          <th>operations</th>
+                      </tr>
+                  </thead>
+                  <tbody>
+                      <tr v-for="item in list" :key="item.id">
+                          <td>{{item.id}}</td>
+                          <td>{{item.name}}</td>
+                          <td>{{item.Ctime}}</td>
+                          <td>
+                              <a href="" @click.prevent='del(item.id)'>删除</a>
+                          </td>
+                      </tr>
+                  </tbody>
+              </table>    
+            </div>
+    
+        
+        
+        
+
+    <script>
+        //配置根域名，
+        //后面单独发起http请求的api地址不用带/
+        Vue.http.options.root="https://www.apiopen.top/"
+
+        //全局启用emulateJSON选项
+        Vue.http.options.emulateJSON=true
+        var vm=new Vue({
+            el:"#app",
+            data:{
+                name:'',
+                list:[
+                    {id:1,name:'宝马',Ctime:new Date()},
+                    {id:2,name:'奔驰',Ctime:new Date()}
+                ]
+            },
+            created(){//
+                // 当vm实例中的data和methods初始化完毕后，vm实例会自动调用created这个
+                // 生命周期函数
+                this.getAllList()
+            },
+            methods:{
+                add(){
+                    //添加品牌列表到后台服务器
+                    //1、通过查看数据API接口文档，要发送一个POST请求，this.$http.post
+                    //2、this.$http.post()接收三个参数
+                    //  2.1第一个参数为url地址
+                    //  2.2第二个参数为要提交给服务器的数据，要以对象形式提交给服务器
+                    //（name：this.name）
+                    //  2.3第三个参数是一个配置对象，要以哪种表单数据类型提交给服务器
+                    //（emulateJSON=true） 以普通表单格式，酱数据提交给服务器
+                    //3.在post方法中使用.then来设置成功的回调函数，需要result.body
+
+                    this.$http.post('journalismApi',{name:this.name},{emulateJSON:true}).then(function(result){
+                        if(result.body.status===0){
+                            //添加完成后，手动调用getAllList()
+                            getAllList()
+                            this.name=''
+                        }
+                        else{
+                            alert('添加失败')
+                        }
+                    })
+                },
+                getAllList(){//
+                    //获取品牌列表数据
+                    this.$http.get('journalismApi').then(function(result){
+                        //通过$http获取到的数据在result.body中
+                        if(result.body.status===0){
+                            //get成功
+                            this.list=result.body.msg
+                        }
+                        else{//失败
+                            alert('获取数据失败')
+                        }
+                    })
+                },
+                del(id){
+                    this.$http.get('journalismApi'+id).then(result=>{
+                        if(result.body.status===0){
+                            //删除成功
+                            getAllList()
+                        }else{
+                            alert('删除失败')
+                        }
+                    })
+                }
+
+            }
+
+        })
+            
+
+
+        
+    </script>
+</body>
+</html>

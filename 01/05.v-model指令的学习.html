@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <div id="app">
+        <h4>{{msg}}</h4>
+        <!-- v-bind只能实现数据的单向绑定 -->
+        <!-- 使用v-model指令可以实现表单元素和Model中的数据的双向数据绑定 -->
+        <!-- v-model只能运用在表单元素中 -->
+        input{radio，text，address，email} select checkbox 
+        <input type="text" name="" id="" v-model="msg" >
+    </div>
+
+
+
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script>
+        var vm=new Vue({
+            el:'#app',
+            data:{
+                msg:'AAAAAAAAaaaaaaaaaaaaadssssssss'
+            },
+            methods:{
+
+            }
+        })
+    </script>
+</body>
+</html>

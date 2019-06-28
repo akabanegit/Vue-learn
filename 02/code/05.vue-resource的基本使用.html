@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <!-- this.$httpjsonp -->
+    <script src="./lib/vue-resource-1.3.4.js"></script>
+    <title>Document</title>
+</head>
+<body>
+    <div id="app">
+        <input type="button" value="get请求" @click="getInfo" name="" id="">
+        <input type="button" value="post请求" @click="postInfo" name="" id="">
+        <input type="button" value="JSONP请求" @click="jsonpInfo" name="" id="">
+    </div>
+    <script>
+        //创建一个Vue的实例，Vue构造函数
+        varvm=new Vue({
+            el:'#app',//表示当前new的这个VUE实例控制区域
+            data:{  //存放el要用的数据
+            },
+            methods:{
+                getInfo(){ //发起get请求
+                //当发起get请求后，通过.then来设置成功的回调函数
+                    this.$http.get('url').then(function(result){
+                        // console.log(result.body)
+                    })
+
+                },
+                //发起post请求 
+                postInfo(){
+                    //手动发起的POST请求，默认没有表单格式，所以有的服务器处理不了
+                    //通过post方法的第三个参数，设置提交内容类型为普通表单数据类型
+                    this.$http.post('url',{},{emulateJSON=true}).then(result=>{
+                        console.log(result.body)
+                    })
+                },
+                jsonInfo(){
+                    //手动发起的POST请求，默认没有表单格式，所以有的服务器处理不了
+                    //通过post方法的第三个参数，设置提交内容类型为普通表单数据类型
+                    this.$http.jsonp('url').then(result=>{
+                        console.log(result.body)
+                    })
+                }
+            }
+        })
+    </script>
+</body>
+</html>

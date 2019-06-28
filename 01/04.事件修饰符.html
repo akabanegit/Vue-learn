@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        .inner{
+            height: 150px;
+            background: #020202;
+        }
+    </style>
+</head>
+<body>
+    <div id="app">
+        <div class="inner" @click="divHandler">
+            <input type="button" value="戳他" @click.stop="btnHandler"><!--.stop阻止冒泡-->
+        </div>
+        <!-- 使用prevent阻止默认行为 -->
+        <a href="http://www.baidu.com" @click.prevent="linkClick">baidu</a>
+
+        <!-- 使用capture来从外到里捕获事件 -->
+        <div class="inner" @click.capture="divHandler">
+                <input type="button" value="戳他" @click="btnHandler">
+        </div>
+
+
+        <!-- .self只有点击自身元素时才会触发事件处理函数 -->
+        <div class="inner" @click.self="divHandler">
+                <input type="button" value="戳他" @click="btnHandler">
+        </div>
+
+
+        <!-- 使用once只触发一次事件处理函数 -->
+        <a href="http://www.baidu.com" @click.prevent.once="linkClick">baidu</a>
+
+        <!-- .stop和.self区别 -->
+        <!-- self只负责阻止自己元素的冒泡行为，并不会阻止内部元素的冒泡行为。 -->
+
+    </div>
+    
+    
+
+
+
+
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script>
+        var vm=new Vue({
+            el:'#app',
+            data:{
+
+            },
+            methods:{
+                divHandler(){
+                    console.log('1')
+                },
+                btnHandler(){
+                    console.log('2')
+                },
+                linkClick(){
+                    console.log('触发')
+                }
+            }
+        })
+    </script>
+</body>
+</html>

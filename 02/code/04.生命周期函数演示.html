@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <title>Document</title>
+</head>
+<body>
+    <div id="app">
+        <p>{{msg}}</p>
+    </div>
+    <script>
+        //创建一个Vue的实例，Vue构造函数
+        var vm=new Vue({
+            el:'#app',//表示当前new的这个VUE实例控制区域
+            data:{  //存放el要用的数据
+                msg:'欢迎学习Vue'//通过vue提供的指令，方便吧数据渲染页面，不手动操作dom元素
+            },
+            methods:{
+                show(){
+                    console.log("执行了show方法")
+                }
+            },
+            beforeCreate(){//这是第一个生命周期函数，表示实例被完全创建出来之前，会执行它
+                //在该生命周期函数执行的时候，data和methods中的数据都还没有被初始化
+            },
+            created(){
+                //这是遇到的第二个生命周期函数
+                //在该生命周期中，data和methods已经被初始化
+                //如果要调用methods中的方法或者操作data中的数据，要在created操作
+            },
+            //Mount =挂载
+            beforeMount(){
+                //这是第三个生命周期函数，模板已经编译完成在内存中
+                //但是尚未把模板渲染到页面中
+                //在beforeMount执行的时候，页面中的元素，还没有真正替换过来
+                //只是之前写的一些模板字符串
+            },
+            mounted(){
+                //第四个生命周期函数，内存中的模板已经被挂载到页面
+                //注意：这是最后一个生命周期函数，当执行完整个就表示实例已经被完全创建好了
+                //如果没有其他操作，这个实例已经被放在内存中
+            },
+            //接下来是组件运行阶段的生命周期函数 只有两个
+            //触发条件为data数据的改变
+            beforeUpdate(){
+                //界面页面还没有被更新，但是model中的数据data已经被更新
+                
+            },
+            updated(){//该函数执行时候，data数据和页面已经保持同步了
+
+
+            },
+            //销毁 阶段
+            beforeDestroy(){
+                //实例已经从运行阶段进入到了销毁阶段：
+                //执行时候，实例上所有data和所有的methods以及过滤器指令都 处于可用状态
+                //此时还没有真正执行销毁的过程
+            },
+            destroyed(){
+                //组件已经被完全销毁了
+            }
+
+        })
+    </script>
+</body>
+</html>

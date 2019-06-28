@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <title>Document</title>
+</head>
+<body>
+    <div id="app">
+        <input type="button" value="kk" name="" id="" @click='flag=!flag'>
+        <!-- v-if特点是每次都会重新清除和创建元素 -->
+        <!-- v-show只是切换元素的display：none样式 -->
+        <!-- v-if有较高的切换性能消耗 v-show有较高的初始渲染消耗 -->
+        <h3 v-if='flag'>这是v-if空值得元素</h3>
+        <h3 v-show='flag'>这是v-show空值得元素</h3>
+    </div>
+    <script>
+        //创建一个Vue的实例，Vue构造函数
+        var vm=new Vue({
+            el:'#app',//表示当前new的这个VUE实例控制区域
+            data:{  //存放el要用的数据
+                msg:'欢迎学习Vue',//通过vue提供的指令，方便吧数据渲染页面，不手动操作dom元素
+                flag:true
+            }
+        })
+    </script>
+</body>
+</html>

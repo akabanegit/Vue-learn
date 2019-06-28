@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    
+    <title>Document</title>
+</head>
+<body>
+    <div id="app">
+        <p>{{msg | msgFormat}}</p>
+    </div>
+
+
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script>
+        //定义一个全局的过滤器，名称msgFormat
+        Vue.filter('msgFormat',function(msg){
+            //第一个参数可以添加正则
+            return msg.replace('单纯','邪恶')
+        })
+        //过滤器可以多次调用
+        //创建一个Vue的实例，Vue构造函数
+        var vm=new Vue({
+            el:'#app',//表示当前new的这个VUE实例控制区域
+            data:{  //存放el要用的数据
+                msg:'欢迎学习Vue，单纯通过vue提供的指令，方便吧数据渲染页面，不手动操作dom元素'//通过vue提供的指令，方便吧数据渲染页面，不手动操作dom元素
+            }
+        })
+    </script>
+</body>
+</html>

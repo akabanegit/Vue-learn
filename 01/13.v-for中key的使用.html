@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <title>Document</title>
+</head>
+<body>
+    <div id="app">
+
+        <div>
+            <label for="">ID:
+                <input type="text" name="" id="" v-model='id'>
+            </label>
+
+
+            <label for="">NAME:
+                    <input type="text" name="" id="" v-model='name'>
+                </label>
+
+            <input type="button" name="" id="" value="添加" @click='addStr'>
+        </div>
+        <!--在组件使用v-for循环时候，或者在一些特殊情况 必须指定唯一字符串/数字类型key值-->
+        <p v-for="item in list" :key="item.id"><!--唯一地址指定key绑定，-->
+            <input type="checkbox" name="" id="">
+            {{item.name}}</p>
+    </div>
+    <script>
+        //创建一个Vue的实例，Vue构造函数
+        var vm=new Vue({
+            el:'#app',//表示当前new的这个VUE实例控制区域
+            data:{ 
+                 //存放el要用的数据
+                id:'',
+                name:'',
+                list:[
+                    {id:1,name:'李斯'},
+                    {id:2,name:'嬴政'},
+                    {id:2,name:'赵高'},
+                    {id:2,name:'韩非'}
+                ]
+            },
+            methods:{
+                addStr(){
+                    // this.list.push({id:this.id,name:this.name})
+                    this.list.unshift({id:this.id,name:this.name})
+                }
+            }
+        })
+    </script>
+</body>
+</html>

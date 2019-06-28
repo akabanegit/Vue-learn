@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <title>Document</title>
+</head>
+<body>
+    <div id="app">
+        <p>{{msg}}</p>
+        <my-com1></my-com1>
+    </div>
+
+    <template id='temp1'>
+        <div>
+            <input type="button" value="+1" @click="increment" name="" id="">
+            <p>{{count}}</p>
+        </div>
+    </template>
+    <script>
+        var dataObj={count:0}
+        //1.组件可以有自己的data数据
+        //2.组件的data和实例的data有点不一样  实例中的data可以是一个对象 而组件中的data必须是一个方法
+        //除了是一个方法，还必须返回一个对象
+        Vue.component('myCom1',{
+            template:'#temp1',//通过该属性指定组件的html结构
+            data:function(){
+                return dataObj
+            },
+            methods:{
+                increment(){
+                    this.count=this.count+1
+                }
+
+                
+            }
+
+        })
+
+
+        //创建一个Vue的实例，Vue构造函数
+        var vm=new Vue({
+            el:'#app',//表示当前new的这个VUE实例控制区域
+            data:{  //存放el要用的数据
+                msg:'欢迎学习Vue'//通过vue提供的指令，方便吧数据渲染页面，不手动操作dom元素
+            }
+        })
+    </script>
+</body>
+</html>

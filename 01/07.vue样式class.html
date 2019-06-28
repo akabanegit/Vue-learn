@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <title>Document</title>
+    <style>
+        .red{
+            color: red;
+        }
+        .thin{
+            font-weight: 200;
+        }
+
+        .italic{
+            font-style: italic;
+        }
+        .active{
+            letter-spacing: 0.5em;
+        }
+    </style>
+</head>
+<body>
+    <div id="app">
+        <!-- 使用三元表达式 -->
+        <!-- <h1 :class="thin,red,flag?">这是很大的H1。！！！！！！</h1> -->
+
+        <!-- 使用对象 -->
+        <!-- <h1 :class="['thin','red',{'active':flag}]">这是很大的H1。！！！！！！</h1> -->
+
+        <!-- 对象  属性为类名，值为标识符 -->
+        <!-- <h1 :class="{red:flase,thin:true,active:true}">这是很大的H1。！！！！！！</h1>     -->
+
+        <h1 :class="classobj">这是很大的H1。！！！！！！</h1>    
+
+    
+    </div>
+
+
+    <script>
+        //创建一个Vue的实例，Vue构造函数
+        new Vue({
+            el:'#app',//表示当前new的这个VUE实例控制区域
+            data:{  //存放el要用的数据
+                classobj:{red:flase,thin:true,active:true},
+                flag:false,
+                msg:'欢迎学习Vue'//通过vue提供的指令，方便吧数据渲染页面，不手动操作dom元素
+            }
+        })
+    </script>
+</body>
+</html>

@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <title>Document</title>
+</head>
+<body>
+    <div id="app">
+        <p>{{msg}}</p>
+
+
+        <!-- 使用组件，把组件的名称以HTML标签形式引入到页面中 -->
+        <!-- 大写字母要使用- -->
+        <my-com1></my-com1>
+    </div>
+    <script>
+        //1.1使用Vue.extend来创建全局的Vue组件
+        var com1=Vue.extend({
+            template:'<h3> 12312</h3>'//通过该属性指定组件的html结构
+        })
+        //1.2使用Vue.component("组件的名称"，创建出来的组件模板对象)
+        // 如果在Vue.component使用驼峰命名，在引用时候，要把大写的字母改为小写，且用-链接
+        //如果不使用驼峰，则直接使用即可
+        Vue.component('myCom1',com1)
+
+
+
+        //创建一个Vue的实例，Vue构造函数
+        var vm=new Vue({
+            el:'#app',//表示当前new的这个VUE实例控制区域
+            data:{  //存放el要用的数据
+                msg:'欢迎学习Vue'//通过vue提供的指令，方便吧数据渲染页面，不手动操作dom元素
+            }
+        })
+    </script>
+</body>
+</html>

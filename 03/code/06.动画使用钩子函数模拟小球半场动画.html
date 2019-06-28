@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <title>Document</title>
+    <style>
+        .ball{
+            width: 15px;
+            height: 15px;
+            border-radius: 50%;
+            background-color: red;
+        }
+    </style>
+</head>
+<body>
+    <div id="app">
+        <input type="button"value="加入购物车" name="" id="" @click="flag=!flag">
+
+        <transition
+        v-on:before-enter="beforeEnter"
+        v-on:enter="enter"
+        v-on:after-enter="afterEnter"
+        
+        >
+            <div class="ball" v-show="flag"></div>
+
+        </transition>
+    </div>
+    <script>
+        //创建一个Vue的实例，Vue构造函数
+        varvm=new Vue({
+            el:'#app',//表示当前new的这个VUE实例控制区域
+            data:{  //存放el要用的数据
+                flag:true
+            },
+            methods:{
+                //el是一个原生的js DOM对象
+                beforeEnter(el){
+                    //表示动画入场之前，动画尚未开始，设置元素开始之前得起始样式
+                    el.style.transform="translate(0,0)"//起始位置
+                },
+                enter(el,done){
+                    //设置小球完成动画后的结束状态
+                    el.offsetWidth
+
+                    el.style.transform="translate(150px,450px)"
+                    el.style.transition="all 1s ease"
+                    done()//done是afterEnter函数的引用
+                },
+                afterEnter(el){
+                    this.flag=!this.flag
+                }
+            }
+
+        })
+    </script>
+</body>
+</html>

@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <link rel="stylesheet" href="./lib/animate.css">
+    <!-- 第三方动画 入场bounceIn 离场bounceOut -->
+
+
+    <title>Document</title>
+    <!-- 自定义两组元素来实现内部元素实现动画 -->
+    <style>
+        /* v-enter是进入之前得起始状态 是时间点 还没有进入 */
+        /* v-leave是动画离开之时的终止状态 动画已经结束 */
+        .v-enter,
+        .v-leave-to{
+            opacity: 0;
+            transform: translateX(150px)
+        }
+
+        .v-enter-active,
+        .v-leave-active{
+            transition:all 0.8s ease;
+        }
+
+
+
+        .my-enter,
+        .my-leave-to{
+            opacity: 0;
+            transform: translateX(150px)
+        }
+
+        .my-enter-active,
+        .my-leave-active{
+            transition:all 0.8s ease;
+        }
+    </style>
+</head>
+<body>
+    <div id="app">
+        <input type="button" value="toggle" name="" id="" @click="flag=!flag">
+
+        <!-- transition是vue官方提供的 -->
+        <transition>
+            <h3 v-if="flag">这是一个h3</h3>
+        </transition>
+        <hr>
+
+        <input type="button" value="toggle" name="" id="" @click="flag2=!flag2">
+
+        <!-- transition是vue官方提供的 -->
+        <transition name="my">
+            <h3 v-if="flag2">这是一个h3</h3>
+        </transition>
+
+
+        <hr>
+        <input type="button" value="toggle" name="" id="" @click="flag3=!flag3">
+
+        <!-- 第三方动画  使用:duration来同意设置入场和离场时候的动画时长-->
+        <transition enter-active-class="animated bounceIn" leave-active-class="animated bounceOut" :duration="40">
+            <h3 v-if="flag3">这是一个h3</h3>
+        </transition>
+    </div>
+    <script>
+        //创建一个Vue的实例，Vue构造函数
+        varvm=new Vue({
+            el:'#app',//表示当前new的这个VUE实例控制区域
+            data:{  //存放el要用的数据
+                flag:false,
+                flag2:false,
+                flag3:false
+            }
+        })
+    </script>
+</body>
+</html>

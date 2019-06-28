@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <title>Document</title>
+    <style>
+        .v-enter,
+        .v-leave-to{
+            opacity: 0;
+            transform: translateX(150px)
+        }
+
+        .v-enter-active,
+        .v-leave-active{
+            transition:all 0.8s ease;
+        }
+
+    </style>
+</head>
+<body>
+    <div id="app">
+            <a href="" @click.prevent="comName='login'">注册</a>
+            <a href="" @click.prevent="comName='register'">登录</a>
+    
+        <!-- Vue提供了component元素，来展示对应名称的组件 -->
+        <!-- :is用来指定展示的组件名称 -->
+        通过mode来实现组件切换时的方式
+        <transition mode="out-in">
+        <component :is="comName"></component>
+    </transition>
+    </div>
+    <script>
+
+
+        // 2.创建组件为去掉中间变量创建
+        //template中有且只有一个唯一的根元素
+        Vue.component('login',{
+            template:'<h3> 注册组件</h3>'//通过该属性指定组件的html结构
+        })
+
+
+        Vue.component('register',{
+            template:'<h3> 登录组件</h3>'//通过该属性指定组件的html结构
+        })
+
+        //创建一个Vue的实例，Vue构造函数
+        var vm=new Vue({
+            el:'#app',//表示当前new的这个VUE实例控制区域
+            data:{  //存放el要用的数据
+                msg:'欢迎学习Vue',//通过vue提供的指令，方便吧数据渲染页面，不手动操作dom元素
+                flag:false,
+                comName:''
+            }
+        })
+    </script>
+</body>
+</html>

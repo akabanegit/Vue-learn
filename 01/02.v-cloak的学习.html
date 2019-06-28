@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        [v-cloak]{
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div id="app">
+        <!--能够解决插值表达式闪烁问题-->
+        <p v-cloak>{{msg}}</p>
+        <h4 v-text="'msg'"></h4><!--默认v-text是没有闪烁问题，会覆盖原本内容-->
+        <div v-text="'msg2'"></div><!--会转义输出文本-->
+        <div v-html="msg2"></div>
+
+        <!--v-bind 是用于绑定属性的指令-->
+        <!--v-bind后可以当做js表达式，-->
+        <!-- <input type="button" name="" value="按钮" v-bind:title='mytitle'  id=""> -->
+
+
+        <!--v-bind简写：-->
+        <!-- v-on:时间绑定机制-->
+        <!-- <input type="button" name="" value="按钮" :title='mytitle'  id="" v-on:click="alert('hello')"> -->
+        
+        <input type="button" value="按钮" name=""  @click="show">
+
+
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script>
+        new Vue({
+            el:'#app',
+            data:{
+                msg:'123',
+                msg2:'<h1>11111</h1>',
+                mytitle:'这是自己定义的title'
+            },
+            methods:{
+                show: function(){
+                    alert('hello')
+                }
+            }
+        })
+    </script>
+</body>
+</html>
