@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <title>Document</title>
+    <!-- 安装vue-router路由模块 -->
+    <script src="./lib/vue-router-3.0.1.js"></script>
+    <style>
+    .router-link-active{
+        color: brown;
+        font-weight: 40;
+        font-size: 50px;
+    }
+    .v-enter,
+    .v-leave-to{
+        opacity:0;
+        transform: translateX(140px);
+    }
+    .v-enter-active,
+    .v-leave-active{
+        transition:all 0.5s ease;
+    }
+    </style>
+</head>
+<body>
+    <div id="app">
+        
+        <router-link to='/login/12'>登录</router-link>
+        <router-link to='/register'>注册</router-link>
+
+        <!-- 这是 vue-router提供的元素 专门用来当做占位符的 -->
+        <transition mode='out-in'>
+                <router-view></router-view>
+        </transition>
+        
+    </div>
+    <script>
+        //组件模板对象
+        var login={
+            template:'<h1>登录---{{$route.params.id}}</h1>',
+
+            created(){
+                console.log(this.$route)
+            }
+
+        }
+
+        var register={
+            template:'<h1>注册</h1>'
+
+        }
+        //2.创建一个路由对象， 当导入vue-router包后，在全局对象中 就有了一个路由的构造函数 叫
+        //VueRouter
+        //在new路由对象的时候可以为构造函数传递一个配置对象
+        var routerObj=new VueRouter({
+            routes:[
+                {path:'/login/:id',component:login},
+                {path:'/register',component:register}
+            ]
+        })
+
+        //创建一个Vue的实例，Vue构造函数
+        var vm=new Vue({
+            el:'#app',//表示当前new的这个VUE实例控制区域
+            data:{  //存放el要用的数据
+            },
+            router:routerObj//将路由规则对象注册到vm实例上来监听URL变化 然后展示对应的组件
+
+            })
+
+
+    </script>
+</body>
+</html>

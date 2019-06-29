@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <title>Document</title>
+    <script src="./lib/vue-router-3.0.1.js"></script>
+</head>
+<body>
+    <div id="app">
+        <router-view></router-view>
+        <router-view name='left'></router-view>
+        <router-view name='main'></router-view>
+    </div>
+    <script>
+        var header ={
+            template:"<h1 class='header'>Header头部区域</h1>"
+        }
+
+        var leftBox ={
+            template:'<h1>leftBox侧边栏区域</h1>'
+        }
+
+        var mainBox ={
+            template:'<h1>mainBox主体区域</h1>'
+        }
+        var router = new VueRouter({
+            routes:[
+                {path:'/',components:{
+                    'default':header,
+                    'left':leftBox,
+                    'main':mainBox
+                }},
+            ]
+        })
+
+        //创建一个Vue的实例，Vue构造函数
+        var vm=new Vue({
+            el:'#app',//表示当前new的这个VUE实例控制区域
+            data:{  //存放el要用的数据
+
+            },
+            router
+        })
+    </script>
+</body>
+</html>
